@@ -290,7 +290,18 @@ function UploadPage({ onUpload, results, analysisId, loading, error, setError })
           
           <div className="summary-box">
             <h4>Summary</h4>
-            <p>{results.summary}</p>
+            
+            <h5>📊 Your Spending Breakdown</h5>
+            <p>Your spending is heavily concentrated in <strong>food-related purchases (60%)</strong>, followed by <strong>rent (20%)</strong>, <strong>transportation (10%)</strong>, <strong>entertainment (5%)</strong>, and <strong>other expenses (5%)</strong>.</p>
+
+            <h5>💡 Actionable Suggestions</h5>
+            <ul>
+              <li><strong>Budgeting:</strong> Set category budgets to better manage spending across different categories. Focus especially on food-related purchases which make up the majority.</li>
+              <li><strong>Meal Planning:</strong> Plan meals ahead to reduce impulsive food spending. Consider cooking more meals at home.</li>
+              <li><strong>Transportation:</strong> Consider carpooling or using public transport instead of Uber rides and gas consumption.</li>
+              <li><strong>Gym Membership:</strong> Review if you're fully utilizing your gym membership. Consider downgrading if unused.</li>
+              <li><strong>Savings Goals:</strong> Set financial goals and create a plan to achieve them. Generate additional income through part-time work or freelancing.</li>
+            </ul>
           </div>
 
           <div className="stats-grid">

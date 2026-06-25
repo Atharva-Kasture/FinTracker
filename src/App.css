@@ -1,3 +1,5 @@
+/* ==================== GLOBAL STYLES ==================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -5,149 +7,491 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background: #f5f5f5;
-  color: #333;
-}
-
-.app {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f7f0f0 0%, #efe8e8 100%);
   min-height: 100vh;
 }
 
-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* ==================== APP LAYOUT ==================== */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: linear-gradient(135deg, #48A111 0%, #25671E 100%);
   color: white;
-  padding: 20px;
+  padding: 16px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-header h1 {
-  font-size: 28px;
+.header h1 {
+  font-size: 24px;
+  font-weight: 600;
 }
 
-header button {
+.logout-btn {
   background: rgba(255, 255, 255, 0.2);
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: white;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-header button:hover {
+.logout-btn:hover {
   background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
 }
+
+/* ==================== PAGES ==================== */
 
 .page {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 30px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
-.page h2 {
-  margin-bottom: 20px;
-  color: #667eea;
+.login-page {
+  min-height: calc(100vh - 70px);
 }
+
+.upload-page {
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ==================== CARDS ==================== */
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #25671E;
+  margin-bottom: 20px;
+}
+
+.results-card {
+  margin-top: 24px;
+}
+
+/* ==================== FORMS & INPUTS ==================== */
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
-input, textarea {
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
+  transition: all 0.3s ease;
 }
 
-input:focus, textarea:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #48A111;
+  box-shadow: 0 0 0 3px rgba(72, 161, 17, 0.1);
 }
+
+input::placeholder {
+  color: #999;
+}
+
+/* ==================== BUTTONS ==================== */
 
 button {
-  padding: 12px 20px;
-  background: #667eea;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 12px 24px;
+  border: 1px solid #48A111;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #48A111;
+  color: white;
+  text-transform: none;
 }
 
-button:hover {
-  background: #5568d3;
+button:hover:not(:disabled) {
+  background: #25671E;
+  border-color: #25671E;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(72, 161, 17, 0.3);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 button:disabled {
   background: #ccc;
+  border-color: #ccc;
+  color: #999;
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
-.login-page p {
-  text-align: center;
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+/* Toggle mode button (secondary style) */
+.toggle-mode button {
+  background: transparent;
+  border: none;
+  color: #48A111;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
   font-size: 14px;
 }
 
-.login-page p button {
-  background: none;
-  color: #667eea;
-  padding: 0;
-  margin-left: 5px;
-  text-decoration: underline;
+.toggle-mode button:hover {
+  color: #25671E;
+  transform: none;
+  box-shadow: none;
 }
 
-.summary {
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 4px;
+/* ==================== LOGIN PAGE ==================== */
+
+.login-page form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-page h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #25671E;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.toggle-mode {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-top: 16px;
+}
+
+.toggle-mode button {
+  margin-left: 4px;
+}
+
+/* ==================== DRAG & DROP ==================== */
+
+.drag-drop {
+  border: 2px dashed #48A111;
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  background: #f0f8e8;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.drag-drop.active {
+  background: #e8f5dd;
+  border-color: #25671E;
+  box-shadow: 0 0 0 3px rgba(72, 161, 17, 0.1);
+}
+
+.drag-content {
+  pointer-events: none;
+}
+
+.drag-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.drag-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #25671E;
+  margin: 0;
+}
+
+.drag-subtext {
+  font-size: 14px;
+  color: #999;
+  margin: 6px 0 0 0;
+}
+
+.file-label {
+  display: block;
+  padding: 10px 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+}
+
+.file-label:hover {
+  background: #efefef;
+  border-color: #48A111;
+  color: #48A111;
+}
+
+/* ==================== ERROR MESSAGES ==================== */
+
+.error-message {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #c33;
+  font-size: 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.error-message::before {
+  content: "⚠";
+  font-size: 16px;
+}
+
+/* ==================== SUCCESS BADGE ==================== */
+
+.success-badge {
+  background: #e8f5dd;
+  border: 1px solid #48A111;
+  color: #25671E;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+/* ==================== RESULTS SECTION ==================== */
+
+.summary-box {
+  background: #f0f8e8;
+  border-left: 4px solid #48A111;
+  padding: 16px;
+  border-radius: 8px;
   margin-bottom: 20px;
 }
 
-.summary h3 {
-  margin-bottom: 10px;
-  color: #667eea;
+.summary-box h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #25671E;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.chat {
-  border-top: 1px solid #ddd;
+.summary-box p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==================== STATS GRID ==================== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #f0f8e8 0%, #e8f5dd 100%);
+  border: 2px solid #F2B50B;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 12px rgba(72, 161, 17, 0.2);
+  transform: translateY(-2px);
+}
+
+.stat-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #25671E;
+}
+
+/* ==================== CHAT SECTION ==================== */
+
+.chat-section {
+  border-top: 1px solid #e0e0e0;
   padding-top: 20px;
+  margin-top: 20px;
 }
 
-.chat h3 {
-  margin-bottom: 15px;
-  color: #667eea;
+.chat-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #25671E;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.chat form {
-  flex-direction: row;
-  gap: 10px;
+.chat-input-group {
+  display: flex;
+  gap: 8px;
 }
 
-.chat input {
+.chat-input-group input {
   flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
-.chat button {
-  min-width: 80px;
+.chat-input-group button {
+  padding: 10px 16px;
+  background: #48A111;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 50px;
 }
 
-.response {
-  background: #f0f4ff;
-  padding: 15px;
-  border-radius: 4px;
-  margin-top: 15px;
-  border-left: 4px solid #667eea;
+.chat-input-group button:hover:not(:disabled) {
+  background: #25671E;
+}
+
+.chat-response {
+  background: #f9f9f9;
+  border-left: 4px solid #48A111;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.chat-response p {
+  margin: 0;
+}
+
+/* ==================== SPINNER ==================== */
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 6px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 600px) {
+  .card {
+    padding: 20px;
+  }
+
+  .page {
+    padding: 20px 16px;
+  }
+
+  .drag-drop {
+    padding: 32px 16px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  button {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
 }

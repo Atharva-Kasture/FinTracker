@@ -315,12 +315,12 @@ button:disabled {
   display: inline-block;
 }
 
-/* ==================== RESULTS SECTION ==================== */
+/* ==================== RESULTS SECTION  ==================== */
 
 .summary-box {
   background: #f0f8e8;
   border-left: 4px solid #48A111;
-  padding: 16px;
+  padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
 }
@@ -329,18 +329,49 @@ button:disabled {
   font-size: 14px;
   font-weight: 600;
   color: #25671E;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.summary-box h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #48A111;
+  margin: 16px 0 8px 0;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.summary-box h5:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 .summary-box p {
   font-size: 14px;
   color: #666;
   line-height: 1.6;
-  margin: 0;
+  margin: 0 0 12px 0;
 }
 
+.summary-box ul {
+  margin: 8px 0 12px 20px;
+  padding: 0;
+}
+
+.summary-box li {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.summary-box strong {
+  color: #25671E;
+  font-weight: 600;
+}
 /* ==================== STATS GRID ==================== */
 
 .stats-grid {

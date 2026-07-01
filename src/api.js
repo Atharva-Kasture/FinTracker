@@ -50,9 +50,10 @@ export const api = {
   // Ask a follow-up question about the analysis
   // Returns: { question, answer }
   chat: async (analysisId, question) => {
-    const res = await fetch(`${API_BASE}/chat/${analysisId}?token=${getToken()}&question=${question}`, {
-      method: "POST"
+    const res = await fetch(`${API_BASE}/chat/${analysisId}?token=${getToken()}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question })
     });
     return res.json();
   }
-};

@@ -274,7 +274,7 @@ function UploadPage({ onUpload, results, analysisId, loading, error, setError })
           <button type="submit" disabled={!file || loading} className="submit-btn">
             {loading ? (
               <>
-                <span className="spinner"></span> Sorry for extended wait, We were short on budget.
+                <span className="spinner"></span> This may take a while, We were short on budget.
               </>
             ) : (
               'Upload & Analyze'

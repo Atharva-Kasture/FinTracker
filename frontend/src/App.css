@@ -1,0 +1,776 @@
+/* ==================== GLOBAL STYLES ==================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f2ece9;
+  min-height: 100vh;
+}
+
+/* ==================== APP LAYOUT ==================== */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: #223f2c;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==================== PAGES ==================== */
+
+.page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.login-page {
+  min-height: calc(100vh - 70px);
+}
+
+.upload-page {
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ==================== CARDS ==================== */
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a241e;
+  margin-bottom: 20px;
+}
+
+.results-card {
+  margin-top: 24px;
+}
+
+/* ==================== FORMS & INPUTS ==================== */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus {
+  outline: none;
+  border-color: #223f2c;
+  box-shadow: 0 0 0 3px rgba(72, 161, 17, 0.1);
+}
+
+input::placeholder {
+  color: #999;
+}
+
+
+/* ==================== BUTTONS ==================== */
+
+button {
+  padding: 12px 24px;
+  border: 1px solid #223f2c;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #223f2c;
+  color: white;
+  text-transform: none;
+}
+
+button:hover:not(:disabled) {
+  background: #1a241e;
+  border-color: #1a241e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(72, 161, 17, 0.3);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background: #ccc;
+  border-color: #ccc;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+/* Toggle mode button (secondary style) */
+.toggle-mode button {
+  background: transparent;
+  border: none;
+  color: #223f2c;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.toggle-mode button:hover {
+  color: #1a241e;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==================== LOGIN PAGE ==================== */
+
+.login-page form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-page h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a241e;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.toggle-mode {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-top: 16px;
+}
+
+.toggle-mode button {
+  margin-left: 4px;
+}
+
+/* ==================== DRAG & DROP ==================== */
+
+.drag-drop {
+  border: 2px dashed #223f2c;
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  background: #f0f8e8;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.drag-drop.active {
+  background: #e8f5dd;
+  border-color: #1a241e;
+  box-shadow: 0 0 0 3px rgba(72, 161, 17, 0.1);
+}
+
+.drag-content {
+  pointer-events: none;
+}
+
+.drag-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.drag-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a241e;
+  margin: 0;
+}
+
+.drag-subtext {
+  font-size: 14px;
+  color: #999;
+  margin: 6px 0 0 0;
+}
+
+.file-label {
+  display: block;
+  padding: 10px 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+}
+
+.file-label:hover {
+  background: #efefef;
+  border-color: #223f2c;
+  color: #223f2c;
+}
+
+/* ==================== ERROR MESSAGES ==================== */
+
+.error-message {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #c33;
+  font-size: 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.error-message::before {
+  content: "⚠";
+  font-size: 16px;
+}
+
+/* ==================== SUCCESS BADGE ==================== */
+
+.success-badge {
+  background: #e8f5dd;
+  border: 1px solid #223f2c;
+  color: #1a241e;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+/* ==================== RESULTS SECTION  ==================== */
+
+.summary-box {
+  background: #f0f8e8;
+  border-left: 4px solid #223f2c;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.summary-box h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a241e;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summary-box h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #223f2c;
+  margin: 16px 0 8px 0;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.summary-box h5:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.summary-box p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 12px 0;
+}
+
+.summary-box ul {
+  margin: 8px 0 12px 20px;
+  padding: 0;
+}
+
+.summary-box li {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.summary-box strong {
+  color: #1a241e;
+  font-weight: 600;
+}
+/* ==================== STATS GRID ==================== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #f0f8e8;
+  border: 2px solid #d8a43d;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 12px rgba(72, 161, 17, 0.2);
+  transform: translateY(-2px);
+}
+
+.stat-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a241e;
+}
+
+/* ==================== CHAT SECTION ==================== */
+
+.chat-section {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.chat-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a241e;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chat-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input-group input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.chat-input-group button {
+  padding: 10px 16px;
+  background: #223f2c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 50px;
+}
+
+.chat-input-group button:hover:not(:disabled) {
+  background: #1a241e;
+}
+
+.chat-response {
+  background: #f9f9f9;
+  border-left: 4px solid #223f2c;
+  padding: 16px;
+  border-radius: 6px;
+  margin-top: 16px;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.chat-response.chat-response--center {
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-response p {
+  margin: 0 0 10px 0;
+}
+
+.chat-response p:last-child {
+  margin-bottom: 0;
+}
+
+.chat-response h5 {
+  margin: 0 0 12px 0;
+  color: #1a241e;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ==================== SPINNER ==================== */
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 6px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 600px) {
+  .card {
+    padding: 20px;
+  }
+
+  .page {
+    padding: 20px 16px;
+  }
+
+  .drag-drop {
+    padding: 32px 16px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  button {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+}
+/* ==================== LOGIN PAGE - REDESIGNED ==================== */
+
+.login-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background: #f5f5f5;
+}
+
+/* LEFT SIDE: GREEN BLOCK */
+.login-left {
+  background: #223f2c;
+  color: white;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 60px;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.login-left h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+.login-left p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 32px 0;
+}
+
+.toggle-login-btn {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 12px 32px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.toggle-login-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* RIGHT SIDE: WHITE FORM */
+.login-right {
+  background: white;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 150px;
+  position: relative;
+  z-index: 1;
+}
+
+.login-right h3 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1a241e;
+  margin: 0 0 24px 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #666;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #000;
+  background: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #223f2c;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(72, 161, 17, 0.1);
+}
+
+.submit-btn {
+  background: #223f2c;
+  color: white;
+  border: none;
+  padding: 13px;
+  border-radius: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #1a241e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(72, 161, 17, 0.3);
+}
+
+.error-message {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: #c33;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.toggle-text {
+  font-size: 13px;
+  color: #999;
+  margin: 20px 0 0 0;
+  text-align: center;
+}
+
+.link-btn {
+  background: transparent;
+  border: none;
+  color: #223f2c;
+  padding: 0;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.link-btn:hover {
+  color: white;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  font-size: 13px;
+}
+
+.benefits-list li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  list-style: none;
+}
+
+.checkmark {
+  color: #d8a43d;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* ACCENT SHAPES */
+.accent-red {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: #E74C3C;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  z-index: 0;
+}
+
+.accent-yellow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  background: #d8a43d;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  z-index: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .login-wrapper {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .login-left {
+    padding: 40px 24px;
+    min-height: 300px;
+  }
+
+  .login-right {
+    padding: 40px 24px;
+  }
+
+  .accent-red {
+    width: 100px;
+    height: 100px;
+  }
+
+  .accent-yellow {
+    width: 80px;
+    height: 80px;
+  }
+}

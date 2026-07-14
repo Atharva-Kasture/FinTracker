@@ -27,11 +27,17 @@ body {
 .header {
   background: #223f2c;
   color: white;
-  padding: 16px 24px;
+  padding: 10px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+  height: 150px;
+  width: auto;
+  display: block;
 }
 
 .header h1 {

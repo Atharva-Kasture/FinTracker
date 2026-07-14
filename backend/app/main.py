@@ -10,6 +10,7 @@ from app.models import User, Analysis, Transaction, ChatMessage
 from app.schemas import UserSignUp, UserLogin, Token
 from app.auth import hash_password, verify_password, create_access_token, verify_token
 from app.agent import run_agent
+import secrets
 
 app = FastAPI(title="Finance Tracker API")
 
@@ -72,6 +73,7 @@ def get_current_user(token: str, db: Session = Depends(get_db)) -> User:
         raise HTTPException(status_code=401, detail="User not found")
     return user
 
+# Upload CSV endpoint
 @app.post("/api/upload")
 def upload_csv(file: UploadFile = File(...), token: str = "", db: Session = Depends(get_db)):
     """Upload CSV and save transactions"""
@@ -118,6 +120,7 @@ def upload_csv(file: UploadFile = File(...), token: str = "", db: Session = Depe
     
     return {"analysis_id": analysis.id, "transaction_count": len(transactions)}
 
+# Analyze endpoint
 @app.post("/api/analyze/{analysis_id}")
 def analyze(analysis_id: int, token: str = "", db: Session = Depends(get_db)):
     """Run agent analysis on transactions"""
@@ -163,6 +166,7 @@ def analyze(analysis_id: int, token: str = "", db: Session = Depends(get_db)):
 class ChatRequest(BaseModel):
     question: str
 
+# Chat endpoint to answer follow-up questions
 @app.post("/api/chat/{analysis_id}")
 def chat(analysis_id: int, request: ChatRequest, token: str = "", db: Session = Depends(get_db)):
     """Answer follow-up questions about analysis"""
@@ -208,6 +212,33 @@ def chat(analysis_id: int, request: ChatRequest, token: str = "", db: Session = 
         "question": request.question,
         "answer": answer
     }
+
+# Guest login endpoint
+@app.post("/api/auth/guest", response_model=Token)
+def guest_login(db: Session = Depends(get_db)):
+    # Generate a random unique suffix for this guest
+    guest_id = secrets.token_hex(6)  # e.g. "a8f3d2c1b9e4"
+    guest_username = f"guest_{guest_id}"
+    guest_email = f"guest_{guest_id}@guest.local"
+    
+    # Guests get a random, unused password (they'll never log in with it)
+    random_password = secrets.token_hex(16)
+    hashed_pw = hash_password(random_password)
+    
+    # Create the temporary guest user
+    guest_user = User(
+        username=guest_username,
+        email=guest_email,
+        password_hash=hashed_pw,
+        is_guest=True
+    )
+    db.add(guest_user)
+    db.commit()
+    db.refresh(guest_user)
+    
+    # Issue a normal access token, same as a real login
+    token = create_access_token({"sub": str(guest_user.id)})
+    return {"access_token": token, "token_type": "bearer"}
 
 # Run the server
 if __name__ == "__main__":

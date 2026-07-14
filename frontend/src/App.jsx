@@ -99,7 +99,7 @@ const handleLogout = () => {
 return (
   <div className="app">
     <header className="header">
-      <img src={HeaderLogo} alt="FinTracker" className="header-logo" style={{ height: '200px' }} />
+      <img src={HeaderLogo} alt="FinTracker" className="header-logo" />
       {token && page !== 'login' && (
         <button className="logout-btn" onClick={handleLogout}>Logout</button>
       )}

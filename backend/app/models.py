@@ -1,5 +1,5 @@
 # Import Libraries
-from sqlalchemy import Column, Integer, String, Text, DateTime, Numeric, ForeignKey, JSON
+from sqlalchemy import Column, Integer, String, Text, DateTime, Numeric, ForeignKey, JSON, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 
@@ -14,6 +14,7 @@ class User(Base):
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(100), unique=True, nullable=False)
     password_hash = Column(String(255), nullable=False)
+    is_guest = Column(Boolean, default=False, nullable=False)       #Guest users login
     created_at = Column(DateTime, default=datetime.utcnow)
 
 # Analysis model to store results of financial analysis

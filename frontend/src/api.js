@@ -26,6 +26,15 @@ export const api = {
     return res.json();
   },
 
+  // Log in as a temporary guest (no credentials needed)
+  // Returns: { access_token, token_type }
+  guestLogin: async () => {
+    const res = await fetch(`${API_BASE}/auth/guest`, {
+      method: "POST"
+    });
+    return res.json();
+  },
+  
   // Upload CSV file with transactions
   // Returns: { analysis_id, transaction_count }
   uploadCSV: async (file) => {

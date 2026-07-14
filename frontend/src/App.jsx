@@ -59,6 +59,23 @@ export default function App() {
     }
   };
 
+  // Handle guest login
+  const handleGuestLogin = async () => {
+    setError('');   // Clear previous errors
+    try {
+      const res = await api.guestLogin();
+      if (res.access_token) {
+        localStorage.setItem('token', res.access_token);
+        setToken(res.access_token);
+        setPage('upload');
+      } else {
+        setError('Guest login failed');
+      }
+    } catch (err) {
+      setError('Network error. Check your backend is running.');
+    }
+  };
+
   // Handle CSV upload
   const handleUpload = async (file) => {
     setError('');  // Clear previous errors
@@ -107,7 +124,7 @@ return (
 
     {page === 'login' && (
       <div style={{ width: '100vw', flex: 1, margin: 0, padding: 0, position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', display: 'flex' }}>
-        <LoginPage onSignup={handleSignup} onLogin={handleLogin} error={error} setError={setError} />
+        <LoginPage onSignup={handleSignup} onLogin={handleLogin} onGuestLogin={handleGuestLogin} error={error} setError={setError} />
       </div>
     )}
     {page === 'upload' && <UploadPage onUpload={handleUpload} results={results} analysisId={analysisId} loading={loading} error={error} setError={setError} />} 
@@ -116,7 +133,7 @@ return (
 }
 
 // Login Component
-function LoginPage({ onSignup, onLogin, error, setError }) {
+function LoginPage({ onSignup, onLogin, onGuestLogin, error, setError }) {
   const [mode, setMode] = useState('login');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -147,12 +164,9 @@ function LoginPage({ onSignup, onLogin, error, setError }) {
         <button 
           type="button"
           className="toggle-login-btn"
-          onClick={() => {
-            setMode(mode === 'login' ? 'signup' : 'login');
-            setError('');
-          }}
+          onClick={onGuestLogin}
         >
-          {mode === 'login' ? 'Create Account' : 'Sign In'}
+          Continue as Guest
         </button>
       </div>
 

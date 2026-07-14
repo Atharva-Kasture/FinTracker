@@ -152,7 +152,6 @@ function LoginPage({ onSignup, onLogin, onGuestLogin, error, setError }) {
     <div className="login-wrapper">
       {/* LEFT SIDE: GREEN BLOCK WITH MESSAGE */}
       <div className="login-left">
-      <img src={logo} alt="FinTracker" className="login-logo" style={{ height: '200px' }} />
         <h2>Welcome Back!</h2>
         <h4>Smart spending insights powered by AI.</h4>
         <p>Upload your transactions and get instant analysis, patterns, and actionable recommendations.</p>

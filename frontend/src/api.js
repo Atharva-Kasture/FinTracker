@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8000/api";
+const API_BASE = "https://fintracker-production-fcaf.up.railway.app/api";
 
 // Get JWT token from browser storage
 const getToken = () => localStorage.getItem("token");

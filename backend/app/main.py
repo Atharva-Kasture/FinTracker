@@ -157,10 +157,17 @@ def analyze(analysis_id: int, token: str = "", db: Session = Depends(get_db)):
     analysis.patterns = result["patterns"]
     db.commit()
     
+    # Calculate real stats from the actual transactions
+    total_amount = sum(tx["amount"] for tx in tx_list)
+    avg_amount = total_amount / len(tx_list) if tx_list else 0
+    
     return {
         "analysis_id": analysis.id,
         "summary": result["summary"],
-        "patterns": result["patterns"]
+        "patterns": result["patterns"],
+        "total_transactions": len(tx_list),
+        "total_amount": round(total_amount, 2),
+        "avg_amount": round(avg_amount, 2)
     }
 
 class ChatRequest(BaseModel):
